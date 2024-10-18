@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
+    "test": "echo running tests",
     "prepare": "husky install"
   },
   "lint-staged": {
@@ -20,14 +21,23 @@
     "react": "^18",
     "react-dom": "^18"
   },
+  "config": {
+    "commitizen": {
+      "path": "git-cz"
+    }
+  },
   "devDependencies": {
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "commitizen": "^4.3.1",
     "eslint": "^8",
     "eslint-config-next": "14.2.15",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
+    "git-cz": "^4.9.0",
     "husky": "^8.0.0",
     "lint-staged": "^15.2.10",
     "postcss": "^8",
