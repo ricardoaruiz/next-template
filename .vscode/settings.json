@@ -3,5 +3,15 @@
     "source.organizeImports": "always",
     "source.removeUnusedImports": "always",
     "source.fixAll.eslint": "explicit"
-  }
+  },
+  "tailwindCSS.experimental.classRegex": [
+    [
+      "cva\\(([^)]*)\\)",
+      "[\"'`]([^\"'`]*).*?[\"'`]"
+    ],
+    [
+      "cx\\(([^)]*)\\)",
+      "(?:'|\"|`)([^']*)(?:'|\"|`)"
+    ]
+  ]
 }
