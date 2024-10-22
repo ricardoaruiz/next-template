@@ -34,3 +34,8 @@ export class FormFieldsValidationException<T> extends Error {
     this.errors = errors;
   }
 }
+
+export type FormValidations<TFormFieldErrors> = Partial<TFormFieldErrors> & {
+  ok?: boolean;
+  message?: string;
+};
