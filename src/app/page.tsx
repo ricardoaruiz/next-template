@@ -1,18 +1,21 @@
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
+import Link from 'next/link';
 
 export default function Home() {
   return (
     <main className="flex h-screen flex-col items-center justify-center">
-      <h1 className="mb-4 text-6xl font-light">Next Template</h1>
-      <Button className="min-w-52">Click Me</Button>
-      <Text as="h1" size="lg" className="mb-4">
-        H1
+      <Text as="h1" className="mb-4 text-6xl font-light">
+        Next Template
       </Text>
-      <Text as="h2" size="sm" className="mb-4">
-        H2
+
+      <Button className="min-w-52" asChild>
+        <Link href="/sample">Exemplos</Link>
+      </Button>
+
+      <Text size="sm" className="mt-4">
+        Clique no botão acima e veja exemplos
       </Text>
-      <Text>Paragraph</Text>
     </main>
   );
 }

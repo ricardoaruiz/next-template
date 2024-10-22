@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useFormState } from 'react-dom';
+import toast from 'react-hot-toast';
 import {
   SignupFormValidations,
   UseSignuptFormModel
@@ -38,8 +39,13 @@ export const useSignupFormModel = ({ action }: UseSignuptFormModel) => {
     if (formState.ok) {
       formRef.current?.reset();
       firstFieldRef.current?.focus();
+      toast.success('Usuário criado com sucesso!');
     }
-  }, [formState.ok]);
+
+    if (!formState.ok) {
+      toast.error('Erro ao criar o usuario. Tente novamente');
+    }
+  }, [formState]);
 
   return {
     formState,

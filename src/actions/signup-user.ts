@@ -57,7 +57,6 @@ export const signupUser = async (
   } catch (error: unknown) {
     if (error instanceof FormFieldsValidationException) {
       return {
-        ok: false,
         fieldErrors: error.errors
       };
     }
