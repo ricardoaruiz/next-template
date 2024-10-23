@@ -1,38 +1,43 @@
 import { useRouteHandler } from '@/hooks/useRouteHandler';
-import { useCallback } from 'react';
+import { ChangeEvent, useCallback, useRef } from 'react';
 import { useDebounceCallback } from 'usehooks-ts';
 import { Filter } from './order-filter.types';
 
 export const useOrderFilterModel = () => {
-  const { replaceUrl, searchParams } = useRouteHandler();
+  const filterFormRef = useRef<HTMLFormElement>(null);
+  const { replaceUrl, pushUrl, searchParams } = useRouteHandler();
 
   const filter: Filter = {
     search: searchParams.get('search') ?? '',
     status: searchParams.get('status') ?? ''
   };
 
-  const handleApplyFilter = useCallback(
-    (formData: FormData) => {
-      const filter = Object.fromEntries(formData.entries()) as Filter;
+  const handleClearFilter = useCallback(() => {
+    filterFormRef.current?.reset();
+
+    pushUrl({
+      search: [
+        { name: 'search', value: '' },
+        { name: 'status', value: '' }
+      ]
+    });
+  }, [pushUrl]);
+
+  const handleSearchChanbe = useDebounceCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const search = event.target.value;
 
       replaceUrl({
-        search: [
-          { name: 'search', value: filter.search },
-          { name: 'status', value: filter.status }
-        ]
+        search: { name: 'search', value: search }
       });
     },
-    [replaceUrl]
+    500
   );
 
-  const handleSearchChanbe = useDebounceCallback((search: string) => {
-    replaceUrl({
-      search: { name: 'search', value: search }
-    });
-  }, 500);
-
   const handleStatusChange = useCallback(
-    (status: string) => {
+    (event: ChangeEvent<HTMLSelectElement>) => {
+      const status = event.currentTarget.value;
+
       replaceUrl({
         search: { name: 'status', value: status }
       });
@@ -40,5 +45,11 @@ export const useOrderFilterModel = () => {
     [replaceUrl]
   );
 
-  return { filter, handleApplyFilter, handleSearchChanbe, handleStatusChange };
+  return {
+    filter,
+    filterFormRef,
+    handleSearchChanbe,
+    handleStatusChange,
+    handleClearFilter
+  };
 };

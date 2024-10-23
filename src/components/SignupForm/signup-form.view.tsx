@@ -26,7 +26,7 @@ export const SignupForm = (props: SignupFormProps) => {
       ref={formRef}
       action={formAction}
       noValidate
-      className="mx-auto flex max-w-[500px] flex-col gap-4 rounded-lg border border-slate-200 p-4 shadow-lg shadow-indigo-200/50"
+      className="mx-auto flex w-full max-w-[1040px] flex-col gap-4 rounded-lg border border-slate-200 p-4 shadow-lg shadow-indigo-200/50"
       {...rest}
     >
       <Text as="h1" size="lg">
